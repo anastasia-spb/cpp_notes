@@ -1,0 +1,22 @@
+__stdcall and __cdecl are "calling conventions" used by Visual C++
+
+Read: https://www.codeproject.com/Articles/1388/Calling-Conventions-Demystified
+
+A calling convention describes how the arguments are passed and values returned by functions.
+It also specifies how the function names are decorated.
+
+When you call a function, what happens at the assembly level is all the passed-in parameters are pushed to the stack,
+then the program jumps to a different area of code.
+The new area of code looks at the stack and expects the parameters to be placed there.
+Different calling conventions push parameters in different ways.
+Some might push the first parameter first, or some might push the first param last.
+Or some might keep a parameter in a register and not push it at all.
+By specifying a calling convention, you are telling the compiler how the parameters are to be pushed.
+
+It's important when dealing with external libraries: 
+the calling convention used in the lib to match the calling convention used in the code
+that is calling into the lib, or else your parameters will be all messed up when you call a lib function.
+
+__cdecl Ч отсутствие декорации имен. ѕримен€ть в том случае, если в C++ используешь функцию, которую написали на C или наоборот, на —++ пишешь функцию дл€ C.
+__fastcall Ч передача части параметров и результата не через стек, а через регистры. ƒл€ оптимизации примен€етс€.
+__stdcall Ч оно же PASCAL Ч противоположный C-шному договор о передаче параметров в функцию и о том, кто после выполнени€ функции чистит стек. ѕримен€етс€ в Win API.
